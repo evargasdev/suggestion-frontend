@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "flowbite-react";
+import Provider from "@/providers/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geist = Geist({
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -19,11 +21,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body className={geist.className}>
+        <Provider>
+          <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-indigo-200 via-white to-indigo-500">
+            <main className="sm:max-w-xs md:max-w-lg">{children}</main>
+          </div>
+        </Provider>
+      </body>
     </html>
   );
 }

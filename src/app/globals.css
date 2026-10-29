@@ -1,26 +1,54 @@
 @import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../../.flowbite-react/class-list.json";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces & foreground · tema claro "Caribe operativo" */
+  --background: #f5f8fa;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --surface-3: #e7eef3;
+  --foreground: #0d1c33;
+  --muted: #4d6783;
+  --muted-2: #6c8197;
+
+  /* Borders */
+  --border: #e3e9ef;
+  --border-2: #d3dde6;
+
+  /* Ring/focus */
+  --ring: #0e9eba;
+
+  /* Compatibilidad con clases heredadas (text-[var(--muted)], text-[var(--heading)], font-[family-name:var(--sans)]) */
+  --heading: var(--foreground);
+  --sans: Geist, 'Geist Fallback', sans-serif;
+
+  /* Tipografía */
+  --font-main: Geist, 'Geist Fallback', sans-serif;
+
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-border: var(--border);
+  --color-border-2: var(--border-2);
+  --color-ring: var(--ring);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-main);
+
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
