@@ -2,8 +2,8 @@ import { Button, Card } from "flowbite-react";
 
 export default function Home() {
   return (
-    <Card className="text-center shadow-xl backdrop-blur-3xl rounded-3xl mx-5">
-      <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-700">
+    <Card className="text-center shadow-xl bg-white/40 backdrop-blur-3xl rounded-3xl mx-5">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-purple-700">
         Tu opinión nos ayuda
       </p>
       <h1 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
