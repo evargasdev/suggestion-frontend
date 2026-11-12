@@ -4,13 +4,13 @@ import { useState } from "react";
 
 import {
   submitEvaluation,
-  type EvaluationAnswerInput,
+  type EvaluationSubmissionInput,
 } from "@/lib/api/evaluations";
 
 interface SubmitEvaluationState {
   isSubmitting: boolean;
   error: string | null;
-  submit: (answers: EvaluationAnswerInput[]) => Promise<string | null>;
+  submit: (submission: EvaluationSubmissionInput) => Promise<string | null>;
 }
 
 export function useSubmitEvaluation(): SubmitEvaluationState {
@@ -18,13 +18,13 @@ export function useSubmitEvaluation(): SubmitEvaluationState {
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (
-    answers: EvaluationAnswerInput[],
+    submission: EvaluationSubmissionInput,
   ): Promise<string | null> => {
     setIsSubmitting(true);
     setError(null);
 
     try {
-      const evaluation = await submitEvaluation(answers);
+      const evaluation = await submitEvaluation(submission);
       return evaluation.id;
     } catch (submitError) {
       setError(
