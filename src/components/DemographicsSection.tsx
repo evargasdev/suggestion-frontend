@@ -14,8 +14,43 @@ export interface DemographicsData {
   position: string;
 }
 
+export type DemographicsField =
+  | "ageRange"
+  | "genderIdentity"
+  | "origin"
+  | "foreignCountry"
+  | "careResponsibilitiesDetails"
+  | "activityType"
+  | "sector"
+  | "position";
+
+export function getMissingDemographicsField(
+  demographics: DemographicsData,
+): DemographicsField | null {
+  if (!demographics.ageRange) return "ageRange";
+  if (!demographics.genderIdentity) return "genderIdentity";
+  if (!demographics.origin) return "origin";
+  if (
+    demographics.origin === "Extranjera" &&
+    !demographics.foreignCountry.trim()
+  ) {
+    return "foreignCountry";
+  }
+  if (
+    demographics.hasCareResponsibilities &&
+    demographics.careResponsibilitiesDetails.length === 0
+  ) {
+    return "careResponsibilitiesDetails";
+  }
+  if (!demographics.activityType) return "activityType";
+  if (!demographics.sector) return "sector";
+  if (!demographics.position) return "position";
+  return null;
+}
+
 interface DemographicsSectionProps {
   demographics: DemographicsData;
+  invalidField: DemographicsField | null;
   onChangeDemographics: React.Dispatch<React.SetStateAction<DemographicsData>>;
   ageRanges: string[];
   genderIdentities: string[];
@@ -29,6 +64,7 @@ interface DemographicsSectionProps {
 
 export function DemographicsSection({
   demographics,
+  invalidField,
   onChangeDemographics,
   ageRanges,
   genderIdentities,
@@ -39,6 +75,17 @@ export function DemographicsSection({
   sectors,
   positions,
 }: DemographicsSectionProps) {
+  const fieldError = (field: DemographicsField, label: string) =>
+    invalidField === field ? (
+      <span
+        id={`demographics-${field}-error`}
+        className="mt-1.5 block text-sm font-medium text-red-700"
+        role="alert"
+      >
+        {label}
+      </span>
+    ) : null;
+
   const toggleVulnerableGroup = (group: string) => {
     onChangeDemographics((current) => {
       if (group === "ninguna de las anteriores") {
@@ -99,7 +146,14 @@ export function DemographicsSection({
         <label className="block text-sm font-medium text-gray-800">
           Edad
           <Select
+            id="demographics-ageRange"
             value={demographics.ageRange}
+            aria-describedby={
+              invalidField === "ageRange"
+                ? "demographics-ageRange-error"
+                : undefined
+            }
+            aria-invalid={invalidField === "ageRange"}
             onChange={(event) =>
               onChangeDemographics((current) => ({
                 ...current,
@@ -115,6 +169,7 @@ export function DemographicsSection({
               </option>
             ))}
           </Select>
+          {fieldError("ageRange", "Selecciona un rango de edad.")}
         </label>
 
         <fieldset>
@@ -128,10 +183,21 @@ export function DemographicsSection({
                 className="flex items-center gap-2 text-sm text-gray-700"
               >
                 <Radio
-                  name="genderIdentity"
-                  value={identity}
-                  checked={demographics.genderIdentity === identity}
-                  onChange={() =>
+                    id={
+                      identity === genderIdentities[0]
+                        ? "demographics-genderIdentity"
+                        : undefined
+                    }
+                    name="genderIdentity"
+                    value={identity}
+                    checked={demographics.genderIdentity === identity}
+                    aria-describedby={
+                      invalidField === "genderIdentity"
+                        ? "demographics-genderIdentity-error"
+                        : undefined
+                    }
+                    aria-invalid={invalidField === "genderIdentity"}
+                    onChange={() =>
                     onChangeDemographics((current) => ({
                       ...current,
                       genderIdentity: identity,
@@ -143,6 +209,7 @@ export function DemographicsSection({
               </label>
             ))}
           </div>
+          {fieldError("genderIdentity", "Selecciona una opción.")}
         </fieldset>
 
         <fieldset>
@@ -170,7 +237,14 @@ export function DemographicsSection({
         <label className="block text-sm font-medium text-gray-800">
           Estado de Origen
           <Select
+            id="demographics-origin"
             value={demographics.origin}
+            aria-describedby={
+              invalidField === "origin"
+                ? "demographics-origin-error"
+                : undefined
+            }
+            aria-invalid={invalidField === "origin"}
             onChange={(event) =>
               onChangeDemographics((current) => ({
                 ...current,
@@ -188,13 +262,21 @@ export function DemographicsSection({
             ))}
             <option value="Extranjera">Extranjera</option>
           </Select>
+          {fieldError("origin", "Selecciona tu estado de origen.")}
         </label>
 
         {demographics.origin === "Extranjera" && (
           <label className="block text-sm font-medium text-gray-800">
             País de origen
             <TextInput
+              id="demographics-foreignCountry"
               value={demographics.foreignCountry}
+              aria-describedby={
+                invalidField === "foreignCountry"
+                  ? "demographics-foreignCountry-error"
+                  : undefined
+              }
+              aria-invalid={invalidField === "foreignCountry"}
               onChange={(event) =>
                 onChangeDemographics((current) => ({
                   ...current,
@@ -205,6 +287,7 @@ export function DemographicsSection({
               className="mt-1.5 block w-full"
               placeholder="Escribe el país"
             />
+            {fieldError("foreignCountry", "Escribe tu país de origen.")}
           </label>
         )}
 
@@ -219,6 +302,11 @@ export function DemographicsSection({
                 className="flex items-center gap-2 text-sm text-gray-700"
               >
                 <Radio
+                  id={
+                    hasCare
+                      ? "demographics-hasCareResponsibilities"
+                      : undefined
+                  }
                   name="hasCareResponsibilities"
                   checked={demographics.hasCareResponsibilities === hasCare}
                   onChange={() =>
@@ -245,15 +333,32 @@ export function DemographicsSection({
                   className="flex items-center gap-2 text-sm text-gray-700"
                 >
                   <Checkbox
+                    id={
+                      detail === careResponsibilityOptions[0]
+                        ? "demographics-careResponsibilitiesDetails"
+                        : undefined
+                    }
                     checked={demographics.careResponsibilitiesDetails.includes(
                       detail,
                     )}
+                    aria-describedby={
+                      invalidField === "careResponsibilitiesDetails"
+                        ? "demographics-careResponsibilitiesDetails-error"
+                        : undefined
+                    }
+                    aria-invalid={
+                      invalidField === "careResponsibilitiesDetails"
+                    }
                     onChange={() => toggleCareResponsibility(detail)}
                     className="border-gray-300"
                   />
                   {detail}
                 </label>
               ))}
+              {fieldError(
+                "careResponsibilitiesDetails",
+                "Selecciona al menos una responsabilidad.",
+              )}
             </div>
           )}
         </fieldset>
@@ -261,7 +366,14 @@ export function DemographicsSection({
         <label className="block text-sm font-medium text-gray-800">
           Tipo de actividad
           <Select
+            id="demographics-activityType"
             value={demographics.activityType}
+            aria-describedby={
+              invalidField === "activityType"
+                ? "demographics-activityType-error"
+                : undefined
+            }
+            aria-invalid={invalidField === "activityType"}
             onChange={(event) =>
               onChangeDemographics((current) => ({
                 ...current,
@@ -277,12 +389,18 @@ export function DemographicsSection({
               </option>
             ))}
           </Select>
+          {fieldError("activityType", "Selecciona un tipo de actividad.")}
         </label>
 
         <label className="block text-sm font-medium text-gray-800">
           Actividad turística
           <Select
+            id="demographics-sector"
             value={demographics.sector}
+            aria-describedby={
+              invalidField === "sector" ? "demographics-sector-error" : undefined
+            }
+            aria-invalid={invalidField === "sector"}
             onChange={(event) =>
               onChangeDemographics((current) => ({
                 ...current,
@@ -298,12 +416,20 @@ export function DemographicsSection({
               </option>
             ))}
           </Select>
+          {fieldError("sector", "Selecciona una actividad turística.")}
         </label>
 
         <label className="block text-sm font-medium text-gray-800">
           Cargo
           <Select
+            id="demographics-position"
             value={demographics.position}
+            aria-describedby={
+              invalidField === "position"
+                ? "demographics-position-error"
+                : undefined
+            }
+            aria-invalid={invalidField === "position"}
             onChange={(event) =>
               onChangeDemographics((current) => ({
                 ...current,
@@ -319,6 +445,7 @@ export function DemographicsSection({
               </option>
             ))}
           </Select>
+          {fieldError("position", "Selecciona tu cargo.")}
         </label>
       </div>
     </section>

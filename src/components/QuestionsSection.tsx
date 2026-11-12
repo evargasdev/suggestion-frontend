@@ -22,12 +22,14 @@ export interface Dimension {
 interface DimensionQuestionsSectionProps {
   currentDimension: Dimension;
   answers: Record<string, string>;
+  invalidQuestionId: string | null;
   onSelectAnswer: (questionId: string, answerId: string) => void;
 }
 
 export function QuestionsSection({
   currentDimension,
   answers,
+  invalidQuestionId,
   onSelectAnswer,
 }: DimensionQuestionsSectionProps) {
   return (
@@ -45,6 +47,7 @@ export function QuestionsSection({
         {currentDimension.questions.map((question, questionIndex) => (
           <li
             key={question.id}
+            id={`question-${question.id}`}
             className={`space-y-3 rounded-xl border p-4 transition-all duration-200 ${
               answers[question.id]
                 ? "border-purple-200 bg-purple-50/30"
@@ -84,6 +87,12 @@ export function QuestionsSection({
                   ? "grid-cols-2 sm:grid-cols-3"
                   : "grid-cols-2 sm:grid-cols-4"
               }`}
+              aria-describedby={
+                invalidQuestionId === question.id
+                  ? `question-${question.id}-error`
+                  : undefined
+              }
+              aria-invalid={invalidQuestionId === question.id}
               role="group"
             >
               {question.answers.map((answer) => {
@@ -111,6 +120,15 @@ export function QuestionsSection({
                 );
               })}
             </div>
+            {invalidQuestionId === question.id && (
+              <p
+                id={`question-${question.id}-error`}
+                className="text-sm font-medium text-red-700"
+                role="alert"
+              >
+                Responde esta pregunta obligatoria para continuar.
+              </p>
+            )}
           </li>
         ))}
       </ol>
