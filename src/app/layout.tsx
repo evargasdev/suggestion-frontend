@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Provider from "@/providers/ThemeProvider";
 
@@ -8,19 +8,15 @@ const geist = Geist({
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Mujeres y Turismo",
-  description: "Test",
+  title: "Mujeres y Turismo // Test Laboral",
+  description:
+    "Test anónimo para conocer las condiciones laborales de las mujeres en el trabajo turístico de Playa del Carmen.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={geist.className}>
         <Provider>
           <div className="grid min-h-screen place-items-center bg-linear-to-br from-purple-200 via-white to-purple-400">
