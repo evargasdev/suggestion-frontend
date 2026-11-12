@@ -8,6 +8,11 @@ import { textInputTheme } from "./components/textInput";
 import { buttonTheme } from "./components/button";
 import { checkboxTheme } from "./components/checkbox";
 import { radioTheme } from "./components/radio";
+import { modalTheme } from "./components/modal";
+import { badgeTheme } from "./components/badge";
+import { progressTheme } from "./components/progress";
+import { labelTheme } from "./components/label";
+import { tooltipTheme } from "./components/tooltip";
 
 const Provider: FC<PropsWithChildren> = (props) => {
   const { children } = props;
@@ -24,6 +29,11 @@ const Provider: FC<PropsWithChildren> = (props) => {
           checkbox: checkboxTheme,
           radio: radioTheme,
           textInput: textInputTheme,
+          modal: modalTheme,
+          badge: badgeTheme,
+          progress: progressTheme,
+          label: labelTheme,
+          tooltip: tooltipTheme,
         })}
         applyTheme={{
           card: "replace",
@@ -33,6 +43,11 @@ const Provider: FC<PropsWithChildren> = (props) => {
           radio: "replace",
           checkbox: "replace",
           textInput: "replace",
+          modal: "replace",
+          badge: "replace",
+          progress: "replace",
+          label: "replace",
+          tooltip: "replace",
         }}
       >
         {children}
