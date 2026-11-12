@@ -9,18 +9,20 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Mujeres y Turismo // Test Laboral",
+  title: "Mujeres y Turismo // Diagnóstico Laboral",
   description:
-    "Test anónimo para conocer las condiciones laborales de las mujeres en el trabajo turístico de Playa del Carmen.",
+    "Test anónimo para evaluar las condiciones laborales de las mujeres en el trabajo turístico de Playa del Carmen. Proyecto de investigación UQROO.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es">
-      <body className={geist.className}>
+      <body
+        className={`${geist.className} min-h-screen bg-linear-to-br from-purple-100 via-white to-purple-300 text-gray-900 antialiased`}
+      >
         <Provider>
-          <div className="grid min-h-screen place-items-center bg-linear-to-br from-purple-200 via-white to-purple-400">
-            <main className="w-full sm:max-w-xs md:max-w-lg">{children}</main>
+          <div className="flex min-h-screen flex-col">
+            <main className="flex-1 w-full">{children}</main>
           </div>
         </Provider>
       </body>
