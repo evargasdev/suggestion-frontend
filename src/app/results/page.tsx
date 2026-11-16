@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -23,13 +24,13 @@ function getSingleParam(value: string | string[] | undefined): string | null {
 
 function ResultsMessage({ children }: { children: ReactNode }) {
   return (
-    <section className="rounded-3xl border border-[var(--border)] bg-white p-8 text-center shadow-xl">
-      <h1 className="text-2xl font-bold text-[var(--foreground)]">
+    <section className="rounded-3xl border border-border bg-surface p-8 text-center shadow-card">
+      <h1 className="text-2xl font-bold text-foreground">
         Resultados de tu evaluación
       </h1>
-      <p className="mx-auto mt-3 max-w-lg text-[var(--muted)]">{children}</p>
+      <p className="mx-auto mt-3 max-w-lg text-muted">{children}</p>
       <Link
-        className="mt-6 inline-flex rounded-xl bg-[var(--foreground)] px-5 py-3 font-semibold text-white transition-colors hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
+        className="mt-6 inline-flex rounded-xl bg-secondary-900 px-5 py-3 font-semibold text-white transition-colors hover:bg-secondary-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)]"
         href="/"
       >
         Volver al inicio
@@ -38,7 +39,7 @@ function ResultsMessage({ children }: { children: ReactNode }) {
   );
 }
 
-export default async function ResultsPage({
+async function ResultsContent({
   searchParams,
 }: ResultsPageProps) {
   const params = await searchParams;
@@ -54,6 +55,9 @@ export default async function ResultsPage({
     );
   }
 
+  let results: DimensionResult[] = [];
+  let apiError: ApiError | null = null;
+
   try {
     const { data } = await request<EvaluationResultsResponse>({
       baseUrl:
@@ -67,33 +71,53 @@ export default async function ResultsPage({
       throw new ApiError(502, INVALID_RESPONSE_MESSAGE);
     }
 
-    return (
-      <div className="w-full space-y-5">
-        <header className="px-1 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--ring)]">
-            Evaluación completada
-          </p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-[var(--foreground)]">
-            Tus resultados
-          </h1>
-          <p className="mt-2 text-[var(--muted)]">
-            Consulta el puntaje de cada dimensión en sus pestañas.
-          </p>
-        </header>
-        <ResultsTabs results={data.results} />
-      </div>
-    );
+    results = data.results;
   } catch (error) {
     if (!(error instanceof ApiError)) {
       throw error;
     }
 
+    apiError = error;
+  }
+
+  if (apiError) {
     return (
       <ResultsMessage>
-        {error.status === 404
+        {apiError.status === 404
           ? "No encontramos una evaluación con ese identificador."
-          : `No fue posible cargar los resultados. ${error.message}`}
+          : `No fue posible cargar los resultados. ${apiError.message}`}
       </ResultsMessage>
     );
   }
+
+  return (
+    <div className="w-full space-y-5">
+      <header className="px-1 text-center">
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
+          Evaluación completada
+        </p>
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground">
+          Tus resultados
+        </h1>
+        <p className="mt-2 text-muted">
+          Consulta el puntaje de cada dimensión en sus pestañas.
+        </p>
+      </header>
+      <ResultsTabs results={results} />
+    </div>
+  );
+}
+
+export default function ResultsPage(props: ResultsPageProps) {
+  return (
+    <Suspense
+      fallback={
+        <ResultsMessage>
+          Cargando los resultados de tu evaluación...
+        </ResultsMessage>
+      }
+    >
+      <ResultsContent searchParams={props.searchParams} />
+    </Suspense>
+  );
 }

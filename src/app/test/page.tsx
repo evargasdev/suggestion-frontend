@@ -77,8 +77,8 @@ export default function TestPage() {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center px-4">
-        <div className="w-full max-w-md rounded-3xl border border-purple-100 bg-white/80 p-8 text-center shadow-xl backdrop-blur-md">
-          <p className="font-medium text-purple-900">Cargando encuesta...</p>
+        <div className="w-full max-w-md rounded-3xl border border-border bg-surface/80 p-8 text-center shadow-card backdrop-blur-md">
+          <p className="font-medium text-primary-900">Cargando encuesta...</p>
         </div>
       </div>
     );
@@ -86,31 +86,33 @@ export default function TestPage() {
 
   if (error || !survey) {
     return (
-      <div className="mx-auto max-w-md rounded-3xl bg-white p-8 text-center shadow-xl">
-        <h1 className="text-xl font-bold text-[var(--foreground)]">
-          No se pudo cargar la encuesta
-        </h1>
-        <p className="mt-3 text-[var(--muted)]">
-          {error ?? "La encuesta no está disponible en este momento."}
-        </p>
-        <Button
-          color="gray"
-          onClick={() => window.location.reload()}
-          className="mt-5"
-        >
-          Intentar de nuevo
-        </Button>
+      <div className="flex min-h-screen items-center justify-center px-4">
+        <div className="w-full max-w-md rounded-3xl border border-border bg-surface/80 p-8 text-center shadow-card backdrop-blur-md">
+          <h1 className="text-xl font-bold text-foreground">
+            No se pudo cargar la encuesta
+          </h1>
+          <p className="mt-3 text-muted">
+            Lo sentimos, la encuesta no está disponible en este momento
+          </p>
+          <Button
+            color="default"
+            onClick={() => window.location.reload()}
+            className="mt-5"
+          >
+            Intentar de nuevo
+          </Button>
+        </div>
       </div>
     );
   }
 
   if (survey.dimensions.length === 0) {
     return (
-      <div className="mx-auto max-w-md rounded-3xl bg-white p-8 text-center shadow-xl">
-        <h1 className="text-xl font-bold text-[var(--foreground)]">
+      <div className="mx-auto max-w-md rounded-3xl border border-border bg-surface p-8 text-center shadow-card">
+        <h1 className="text-xl font-bold text-foreground">
           Encuesta no disponible
         </h1>
-        <p className="mt-3 text-[var(--muted)]">
+        <p className="mt-3 text-muted">
           No hay dimensiones activas para responder.
         </p>
       </div>
@@ -230,15 +232,15 @@ export default function TestPage() {
 
   return (
     <div ref={topRef} className="mx-auto max-w-md p-4 pb-28 pt-20">
-      <header className="fixed left-0 right-0 top-0 z-20 border-b border-purple-100 bg-white/90 p-4 shadow-sm backdrop-blur-md">
+      <header className="fixed left-0 right-0 top-0 z-20 border-b border-border bg-surface/90 p-4 shadow-card backdrop-blur-md">
         <div className="mx-auto max-w-md space-y-2">
-          <div className="flex items-center justify-between text-xs font-semibold text-gray-700">
+          <div className="flex items-center justify-between text-xs font-semibold text-secondary-700">
             <span className="truncate">
               {currentDimension
                 ? `Dimensión ${currentDimensionIndex + 1} de ${survey.dimensions.length}`
                 : "Datos generales"}
             </span>
-            <span className="ml-2 rounded-full bg-purple-100 px-2.5 py-0.5 text-purple-900">
+            <span className="ml-2 rounded-full bg-primary-100 px-2.5 py-0.5 text-primary-900">
               {progressPercentage}%
             </span>
           </div>
@@ -274,20 +276,20 @@ export default function TestPage() {
 
       {submitError && (
         <p
-          className="mt-5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800"
+          className="mt-5 rounded-xl border border-danger-200 bg-danger-50 p-3 text-sm text-danger-800"
           role="alert"
         >
           {submitError}
         </p>
       )}
 
-      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-purple-100 bg-white/90 p-4 shadow-lg backdrop-blur-md">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-border bg-surface/90 p-4 shadow-pop backdrop-blur-md">
         <div className="mx-auto flex max-w-md items-center justify-between gap-3">
           <Button
             color="light"
             onClick={handlePrev}
             disabled={currentDimensionIndex < 0 || isSubmitting}
-            className="w-1/2 border-gray-300 text-gray-700"
+            className="w-1/2 border-border-2 text-secondary-700"
           >
             Anterior
           </Button>
@@ -296,7 +298,7 @@ export default function TestPage() {
             <Button
               onClick={handleNext}
               disabled={isSubmitting}
-              className="w-1/2 bg-purple-700 hover:bg-purple-800 focus:ring-purple-300"
+              className="w-1/2 bg-primary-700 hover:bg-primary-800 focus:ring-primary-300"
             >
               {currentDimensionIndex < 0 ? "Continuar" : "Siguiente"}
             </Button>
@@ -304,7 +306,7 @@ export default function TestPage() {
             <Button
               onClick={handleSubmit}
               disabled={isSubmitting}
-              className="w-1/2 bg-purple-900 hover:bg-purple-950 focus:ring-purple-300"
+              className="w-1/2 bg-primary-900 hover:bg-primary-800 focus:ring-primary-300"
             >
               {isSubmitting ? "Enviando..." : "Finalizar test"}
             </Button>

@@ -79,7 +79,7 @@ export function DemographicsSection({
     invalidField === field ? (
       <span
         id={`demographics-${field}-error`}
-        className="mt-1.5 block text-sm font-medium text-red-700"
+        className="mt-1.5 block text-sm font-medium text-danger-700"
         role="alert"
       >
         {label}
@@ -130,20 +130,20 @@ export function DemographicsSection({
   return (
     <section className="space-y-5">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-purple-700">
+        <p className="text-xs font-semibold uppercase tracking-wider text-primary-700">
           Las mujeres en el trabajo turístico
         </p>
-        <h1 className="mt-1 text-xl font-bold text-gray-900">
+        <h1 className="mt-1 text-xl font-bold text-foreground">
           Datos generales
         </h1>
-        <p className="mt-2 text-sm leading-relaxed text-gray-600">
+        <p className="mt-2 text-sm leading-relaxed text-muted">
           Esta información se utiliza únicamente para analizar resultados
           agregados. No se solicitan datos que te identifiquen.
         </p>
       </div>
 
-      <div className="space-y-4 rounded-2xl border border-gray-200 bg-white p-4">
-        <label className="block text-sm font-medium text-gray-800">
+      <div className="space-y-4 rounded-2xl border border-border bg-surface p-4">
+        <label className="block text-sm font-medium text-secondary-800">
           Edad
           <Select
             id="demographics-ageRange"
@@ -173,14 +173,14 @@ export function DemographicsSection({
         </label>
 
         <fieldset>
-          <legend className="text-sm font-medium text-gray-800">
+          <legend className="text-sm font-medium text-secondary-800">
             Te identificas como
           </legend>
           <div className="mt-2 space-y-2">
             {genderIdentities.map((identity) => (
               <label
                 key={identity}
-                className="flex items-center gap-2 text-sm text-gray-700"
+                className="flex items-center gap-2 text-sm text-secondary-700"
               >
                 <Radio
                     id={
@@ -203,7 +203,7 @@ export function DemographicsSection({
                       genderIdentity: identity,
                     }))
                   }
-                  className="border-gray-300"
+                  className="border-border-2"
                 />
                 {identity}
               </label>
@@ -213,7 +213,7 @@ export function DemographicsSection({
         </fieldset>
 
         <fieldset>
-          <legend className="text-sm font-medium text-gray-800">
+          <legend className="text-sm font-medium text-secondary-800">
             ¿Te identificas con alguno de estos grupos? Puedes elegir más de
             uno.
           </legend>
@@ -221,12 +221,12 @@ export function DemographicsSection({
             {vulnerableGroupOptions.map((group) => (
               <label
                 key={group}
-                className="flex items-center gap-2 text-sm text-gray-700"
+                className="flex items-center gap-2 text-sm text-secondary-700"
               >
                 <Checkbox
                   checked={demographics.vulnerableGroups.includes(group)}
                   onChange={() => toggleVulnerableGroup(group)}
-                  className="border-gray-300"
+                  className="border-border-2"
                 />
                 {group}
               </label>
@@ -234,7 +234,7 @@ export function DemographicsSection({
           </div>
         </fieldset>
 
-        <label className="block text-sm font-medium text-gray-800">
+        <label className="block text-sm font-medium text-secondary-800">
           Estado de Origen
           <Select
             id="demographics-origin"
@@ -266,7 +266,7 @@ export function DemographicsSection({
         </label>
 
         {demographics.origin === "Extranjera" && (
-          <label className="block text-sm font-medium text-gray-800">
+          <label className="block text-sm font-medium text-secondary-800">
             País de origen
             <TextInput
               id="demographics-foreignCountry"
@@ -292,14 +292,14 @@ export function DemographicsSection({
         )}
 
         <fieldset>
-          <legend className="text-sm font-medium text-gray-800">
+          <legend className="text-sm font-medium text-secondary-800">
             ¿Tienes personas a tu cuidado?
           </legend>
           <div className="mt-2 flex gap-5">
             {[true, false].map((hasCare) => (
               <label
                 key={String(hasCare)}
-                className="flex items-center gap-2 text-sm text-gray-700"
+                className="flex items-center gap-2 text-sm text-secondary-700"
               >
                 <Radio
                   id={
@@ -318,7 +318,7 @@ export function DemographicsSection({
                         : [],
                     }))
                   }
-                  className="border-gray-300"
+                  className="border-border-2"
                 />
                 {hasCare ? "Sí" : "No"}
               </label>
@@ -330,7 +330,7 @@ export function DemographicsSection({
               {careResponsibilityOptions.map((detail) => (
                 <label
                   key={detail}
-                  className="flex items-center gap-2 text-sm text-gray-700"
+                  className="flex items-center gap-2 text-sm text-secondary-700"
                 >
                   <Checkbox
                     id={
@@ -350,7 +350,7 @@ export function DemographicsSection({
                       invalidField === "careResponsibilitiesDetails"
                     }
                     onChange={() => toggleCareResponsibility(detail)}
-                    className="border-gray-300"
+                    className="border-border-2"
                   />
                   {detail}
                 </label>
@@ -363,7 +363,7 @@ export function DemographicsSection({
           )}
         </fieldset>
 
-        <label className="block text-sm font-medium text-gray-800">
+        <label className="block text-sm font-medium text-secondary-800">
           Tipo de actividad
           <Select
             id="demographics-activityType"
@@ -392,7 +392,7 @@ export function DemographicsSection({
           {fieldError("activityType", "Selecciona un tipo de actividad.")}
         </label>
 
-        <label className="block text-sm font-medium text-gray-800">
+        <label className="block text-sm font-medium text-secondary-800">
           Actividad turística
           <Select
             id="demographics-sector"
@@ -419,7 +419,7 @@ export function DemographicsSection({
           {fieldError("sector", "Selecciona una actividad turística.")}
         </label>
 
-        <label className="block text-sm font-medium text-gray-800">
+        <label className="block text-sm font-medium text-secondary-800">
           Cargo
           <Select
             id="demographics-position"

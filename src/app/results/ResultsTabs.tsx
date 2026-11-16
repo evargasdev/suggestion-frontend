@@ -18,7 +18,7 @@ export default function ResultsTabs({ results }: ResultsTabsProps) {
 
   if (results.length === 0) {
     return (
-      <p className="rounded-2xl border border-[var(--border)] bg-white p-6 text-center text-[var(--muted)]">
+      <p className="rounded-2xl border border-border bg-surface p-6 text-center text-muted">
         Esta evaluación no tiene resultados por dimensión disponibles.
       </p>
     );
@@ -27,10 +27,10 @@ export default function ResultsTabs({ results }: ResultsTabsProps) {
   const activeResult = results[activeIndex];
 
   return (
-    <section className="overflow-hidden rounded-3xl border border-[var(--border)] bg-white shadow-xl">
+    <section className="overflow-hidden rounded-3xl border border-border bg-surface shadow-card">
       <div
         aria-label="Resultados por dimensión"
-        className="flex gap-2 overflow-x-auto border-b border-[var(--border)] p-3"
+        className="flex gap-2 overflow-x-auto border-b border-border p-3"
         role="tablist"
       >
         {results.map((result, index) => (
@@ -41,8 +41,8 @@ export default function ResultsTabs({ results }: ResultsTabsProps) {
             aria-selected={activeIndex === index}
             className={`shrink-0 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--ring)] ${
               activeIndex === index
-                ? "bg-[var(--foreground)] text-white"
-                : "bg-[var(--surface-2)] text-[var(--muted)] hover:bg-[var(--surface-3)]"
+                ? "bg-primary-800 text-white"
+                : "bg-surface-2 text-muted hover:bg-surface-3"
             }`}
             onClick={() => setActiveIndex(index)}
             role="tab"
@@ -61,25 +61,25 @@ export default function ResultsTabs({ results }: ResultsTabsProps) {
         role="tabpanel"
         tabIndex={0}
       >
-        <p className="text-sm font-semibold uppercase tracking-wider text-[var(--muted)]">
+        <p className="text-sm font-semibold uppercase tracking-wider text-muted">
           Resultado de la dimensión
         </p>
-        <h2 className="mt-2 text-2xl font-bold text-[var(--foreground)]">
+        <h2 className="mt-2 text-2xl font-bold text-foreground">
           {activeResult.dimensionLabel}
         </h2>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
-          <article className="rounded-2xl bg-[var(--surface-2)] p-5">
-            <p className="text-sm font-medium text-[var(--muted)]">Puntaje</p>
-            <p className="mt-2 text-4xl font-bold tabular-nums text-[var(--foreground)]">
+          <article className="rounded-2xl bg-surface-2 p-5">
+            <p className="text-sm font-medium text-muted">Puntaje</p>
+            <p className="mt-2 text-4xl font-bold tabular-nums text-foreground">
               {activeResult.score}
             </p>
           </article>
-          <article className="rounded-2xl bg-[var(--surface-2)] p-5">
-            <p className="text-sm font-medium text-[var(--muted)]">
+          <article className="rounded-2xl bg-surface-2 p-5">
+            <p className="text-sm font-medium text-muted">
               Clasificación
             </p>
-            <p className="mt-2 text-xl font-bold capitalize text-[var(--foreground)]">
+            <p className="mt-2 text-xl font-bold capitalize text-foreground">
               {activeResult.classification ?? "No disponible"}
             </p>
           </article>
