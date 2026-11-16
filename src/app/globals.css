@@ -11,12 +11,11 @@
 @source inline("{bg,text,border,ring}-{primary,secondary,sand,success,warning,danger,info}-{50,{100..900..100},950}");
 
 /*
- * Design tokens — Caribe operativo
- * Sistema para operadores de hoteles en la Riviera Maya.
- * Tema exclusivamente claro. Paleta turquesa/caribe + azul marino + arena/cálidos.
- * Estados semánticos: success, warning, danger, info.
- */:root {
-  /* Primary · Violeta / Ciruela — identidad principal, liderazgo y equidad */
+ * Design tokens — identidad violeta y editorial.
+ * Tema claro con violeta primario, tinta índigo y estados semánticos.
+ */
+:root {
+  /* Primary · Violeta / Ciruela — identidad y acciones principales */
   --primary-50: #f8f5ff;
   --primary-100: #efe8ff;
   --primary-200: #e1d4ff;
@@ -28,7 +27,7 @@
   --primary-800: #4e1f9b;
   --primary-900: #411b7d;
 
-  /* Secondary · Índigo pizarra — texto de alto contraste, "ink" profesional */
+  /* Secondary · Índigo pizarra — tinta y elementos neutrales */
   --secondary-50: #f4f3f8;
   --secondary-100: #e5e3ef;
   --secondary-200: #ccc8df;
@@ -41,7 +40,7 @@
   --secondary-900: #1b1729;
   --secondary-950: #0f0d18;
 
-  /* Sand · Rosa empolvado / Terracota suave — badges cálidos, destacados y reconocimientos */
+  /* Sand · Rosa empolvado / Terracota suave — destacados cálidos */
   --sand-50: #fdf6f6;
   --sand-100: #fbeaea;
   --sand-200: #f6d5d6;
@@ -101,7 +100,7 @@
   --info-800: #1e40af;
   --info-900: #1e3a8a;
 
-  /* Surfaces & foreground · tema claro editorial y limpio */
+  /* Surfaces & foreground */
   --background: #f9f8fc;
   --surface: #ffffff;
   --surface-2: #f3f1f8;

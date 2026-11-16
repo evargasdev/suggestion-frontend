@@ -8,7 +8,7 @@ import type { CustomFlowbiteTheme } from 'flowbite-react/types';
  */
 export const accordionTheme: CustomFlowbiteTheme['accordion'] = {
   "root": {
-    "base": "divide-y divide-gray-200 border-gray-200",
+    "base": "divide-y divide-border border-border",
     "flush": {
       "off": "rounded-lg border",
       "on": "border-b"
@@ -25,15 +25,15 @@ export const accordionTheme: CustomFlowbiteTheme['accordion'] = {
         "on": "rotate-180"
       }
     },
-    "base": "flex w-full items-center justify-between p-5 text-left font-medium text-gray-500 first:rounded-t-lg last:rounded-b-lg",
+    "base": "flex w-full items-center justify-between p-5 text-left font-medium text-muted first:rounded-t-lg last:rounded-b-lg",
     "flush": {
-      "off": "hover:bg-gray-100 focus:ring-4 focus:ring-gray-200",
+      "off": "hover:bg-surface-2 focus:ring-4 focus:ring-primary-200",
       "on": "bg-transparent"
     },
     "heading": "",
     "open": {
       "off": "",
-      "on": "bg-gray-100 text-gray-900"
+      "on": "bg-surface-2 text-foreground"
     }
   }
 }

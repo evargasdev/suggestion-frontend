@@ -11,7 +11,7 @@ export const badgeTheme: CustomFlowbiteTheme['badge'] = {
       default:
         'border border-primary-200/80 bg-primary-50 text-primary-900',
       purple:
-        'border border-purple-200/80 bg-purple-100/80 text-purple-900',
+        'border border-primary-200/80 bg-primary-100/80 text-primary-900',
       gray: 'border border-border bg-surface-2 text-muted',
       info: 'border border-info-200 bg-info-50 text-info-900',
       success: 'border border-success-200 bg-success-50 text-success-900',

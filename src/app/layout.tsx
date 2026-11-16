@@ -18,7 +18,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es">
       <body
-        className={`${geist.className} min-h-screen bg-linear-to-br from-purple-100 via-white to-purple-300 text-gray-900 antialiased`}
+        className={`${geist.className} min-h-screen bg-linear-to-br from-primary-50 via-background to-primary-100 text-foreground antialiased`}
       >
         <Provider>
           <div className="flex min-h-screen flex-col">

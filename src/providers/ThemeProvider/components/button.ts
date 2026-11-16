@@ -1,10 +1,10 @@
 import type { CustomFlowbiteTheme } from 'flowbite-react/types';
 
 /*
- * Button — "Caribe operativo"
- * - default (sin color) y `primary`: turquesa identidad de marca.
- * - secondary: azul marino, autoridad.
- * - danger: coral, bloqueante.
+ * Button — sistema violeta editorial.
+ * - default y `primary`: violeta de identidad.
+ * - secondary: índigo de alto contraste.
+ * - danger: carmesí para acciones destructivas o errores.
  * - light / ghost: superficies suaves para acciones secundarias.
  * Tamaños en una escala 1.2: xs (28) · sm (36) · md (40) · lg (44) · xl (48).
  * Botón de control debe tener al menos 40px de altura (sm y arriba) para hit-area.
@@ -28,9 +28,7 @@ export const buttonTheme: CustomFlowbiteTheme['button'] = {
       'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',
     alternative:
       'border border-border bg-surface text-secondary-700 hover:bg-surface-2 hover:text-secondary-900 active:bg-surface-3',
-    // Aliases semánticos — sistema "Caribe operativo"
-    // Mapean a los tokens visuales correctos, sin divergencias entre las
-    // variantes estándar (blue/green/red/etc.) y los nombres del sistema.
+    // Los alias estándar conservan compatibilidad con los tonos semánticos.
     secondary:
       'bg-secondary-700 text-white hover:bg-secondary-800 active:bg-secondary-900',
     success:
@@ -52,7 +50,7 @@ export const buttonTheme: CustomFlowbiteTheme['button'] = {
       'border border-border bg-surface text-secondary-700 hover:bg-surface-2 hover:text-secondary-900',
     lime: 'bg-success-500 text-secondary-900 hover:bg-success-600 hover:text-white active:bg-success-700 active:text-white',
     pink: 'bg-danger-600 text-white hover:bg-danger-700 active:bg-danger-800',
-    purple: 'bg-secondary-700 text-white hover:bg-secondary-800 active:bg-secondary-900',
+    purple: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',
     red: 'bg-danger-600 text-white hover:bg-danger-700 active:bg-danger-800',
     teal: 'bg-primary-700 text-white hover:bg-primary-800 active:bg-primary-900',
     yellow:
@@ -80,7 +78,7 @@ export const buttonTheme: CustomFlowbiteTheme['button'] = {
     indigo: 'border border-primary-800 text-primary-800 hover:bg-primary-50 hover:text-primary-900',
     lime: 'border border-success-500 text-success-700 hover:bg-success-50 hover:text-success-800',
     pink: 'border border-danger-600 text-danger-700 hover:bg-danger-50 hover:text-danger-800',
-    purple: 'border border-secondary-700 text-secondary-700 hover:bg-secondary-50 hover:text-secondary-900',
+    purple: 'border border-primary-600 text-primary-700 hover:bg-primary-50 hover:text-primary-800',
     red: 'border border-danger-600 text-danger-700 hover:bg-danger-50 hover:text-danger-800',
     teal: 'border border-primary-700 text-primary-700 hover:bg-primary-50 hover:text-primary-800',
     yellow:

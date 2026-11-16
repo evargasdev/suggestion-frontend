@@ -10,7 +10,7 @@ export const progressTheme: CustomFlowbiteTheme['progress'] = {
   bar: 'flex items-center justify-center rounded-full text-center font-medium leading-none text-white transition-all duration-300 ease-out',
   color: {
     default: 'bg-primary-600',
-    purple: 'bg-purple-700',
+    purple: 'bg-primary-700',
     dark: 'bg-foreground',
     gray: 'bg-muted',
     green: 'bg-success-600',

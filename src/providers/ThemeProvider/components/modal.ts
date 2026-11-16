@@ -9,7 +9,7 @@ export const modalTheme: CustomFlowbiteTheme['modal'] = {
   root: {
     base: 'fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full',
     show: {
-      on: 'flex bg-gray-950/40 backdrop-blur-xs transition-opacity duration-200',
+      on: 'flex bg-secondary-950/40 backdrop-blur-xs transition-opacity duration-200',
       off: 'hidden',
     },
     sizes: {
