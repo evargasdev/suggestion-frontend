@@ -264,7 +264,8 @@ export default function DashboardResults({
         theme={{
           tablist: {
             variant: {
-              underline: "-mb-px flex-wrap border-b border-border",
+              underline:
+                "-mb-px flex w-full flex-nowrap justify-start overflow-x-auto border-b border-border",
             },
             tabitem: {
               variant: {
@@ -286,7 +287,7 @@ export default function DashboardResults({
               key={dimension.dimensionId}
               title={
                 <span className="inline-flex items-center gap-2">
-                  {dimension.label}
+                  <span className="whitespace-nowrap">{dimension.label}</span>
                   <span className="rounded-full bg-primary-100 px-2 py-0.5 text-xs font-semibold text-primary-900">
                     {dimension.stats.length}
                   </span>

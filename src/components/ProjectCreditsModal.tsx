@@ -43,31 +43,31 @@ export default function ProjectCreditsModal({
             <div className="space-y-3">
               <div className="rounded-xl border border-primary-100 bg-primary-50/40 p-3.5">
                 <p className="font-semibold text-foreground">
-                  Dra. [Nombre y Apellidos de la Investigadora 1]
+                  Dra. María del Pilar Hernández Limonchi
                 </p>
                 <p className="mt-0.5 text-xs text-muted">
                   Universidad Autónoma del Estado de Quintana Roo (UQROO)
                 </p>
                 <a
                   className="mt-1.5 inline-block text-xs font-medium text-primary-700 hover:underline"
-                  href="mailto:correo1@uqroo.edu.mx"
+                  href="mailto:mp.hernandez.limonchi@uqroo.edu.mx"
                 >
-                  correo1@uqroo.edu.mx
+                  mp.hernandez.limonchi@uqroo.edu.mx
                 </a>
               </div>
 
               <div className="rounded-xl border border-primary-100 bg-primary-50/40 p-3.5">
                 <p className="font-semibold text-foreground">
-                  Dra. [Nombre y Apellidos de la Investigadora 2]
+                  Dra. Alma Ivonne Marín Marín
                 </p>
                 <p className="mt-0.5 text-xs text-muted">
                   Universidad Autónoma del Estado de Quintana Roo (UQROO)
                 </p>
                 <a
                   className="mt-1.5 inline-block text-xs font-medium text-primary-700 hover:underline"
-                  href="mailto:correo2@uqroo.edu.mx"
+                  href="mailto:aimarin@uqroo.edu.mx"
                 >
-                  correo2@uqroo.edu.mx
+                  aimarin@uqroo.edu.mx
                 </a>
               </div>
             </div>
