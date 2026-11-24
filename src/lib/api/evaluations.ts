@@ -63,12 +63,21 @@ export interface DashboardStat {
   evaluationCount: number;
 }
 
-export const API_BASE_URL =
+export interface DashboardClassificationStat {
+  dimensionId: string;
+  dimensionLabel: string;
+  classification: string;
+  evaluationCount: number;
+}
+
+export const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_BASE_URL ??
   process.env.API_BASE_URL ??
-  "http://localhost:4000";
+  "http://localhost:4000"
+).replace(/\/+$/, "");
 
 export async function getActiveSurvey(): Promise<SurveyResponse> {
+  console.log(API_BASE_URL)
   const { data } = await request<SurveyResponse>({
     baseUrl: API_BASE_URL,
     path: "/api/evaluations/survey",
@@ -126,6 +135,23 @@ export async function getDashboardStats(): Promise<DashboardStat[]> {
 
   if (!Array.isArray(data)) {
     throw new Error("Los resultados agregados recibidos no tienen un formato válido.");
+  }
+
+  return data;
+}
+
+export async function getDashboardClassificationStats(): Promise<
+  DashboardClassificationStat[]
+> {
+  const { data } = await request<DashboardClassificationStat[]>({
+    baseUrl: API_BASE_URL,
+    path: "/api/evaluations/dashboard/classifications",
+  });
+
+  if (!Array.isArray(data)) {
+    throw new Error(
+      "La distribución de resultados recibida no tiene un formato válido.",
+    );
   }
 
   return data;

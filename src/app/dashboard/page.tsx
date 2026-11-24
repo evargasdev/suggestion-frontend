@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 
 import {
-  API_BASE_URL,
-  getDashboardStats,
-  type DashboardStat,
+  getActiveSurvey,
+  getDashboardClassificationStats,
+  type DashboardClassificationStat,
 } from "@/lib/api/evaluations";
 import { ApiError } from "@/lib/api/http/errors";
 import InstitutionalFooter from "@/components/InstitutionalFooter";
@@ -14,7 +14,7 @@ function DashboardError({ message }: { message: string }) {
   return (
     <section className="rounded-3xl border border-border bg-surface p-8 text-center shadow-card">
       <h1 className="text-2xl font-bold text-foreground">
-        No se pudieron cargar los resultados agregados
+        No se pudieron cargar los resultados agregados.
       </h1>
       <p className="mx-auto mt-3 max-w-lg text-muted">{message}</p>
       <Button color="default" size="xl" className="mt-6" href="/">
@@ -33,11 +33,17 @@ function DashboardLoading() {
 }
 
 async function DashboardContent() {
-  let stats: DashboardStat[] = [];
+  let stats: DashboardClassificationStat[] = [];
+  let dimensionOrder: string[] = [];
   let loadError: string | null = null;
 
   try {
-    stats = await getDashboardStats();
+    const [classificationStats, survey] = await Promise.all([
+      getDashboardClassificationStats(),
+      getActiveSurvey(),
+    ]);
+    stats = classificationStats;
+    dimensionOrder = survey.dimensions.map((dimension) => dimension.id);
   } catch (error) {
     if (!(error instanceof ApiError)) {
       throw error;
@@ -60,22 +66,12 @@ async function DashboardContent() {
           Resultados agregados
         </h1>
         <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-          Explora los promedios por dimensión, actividad turística y cargo. Solo
-          se muestran grupos que cumplen el mínimo de privacidad definido para
-          el panel.
+          Consulta el porcentaje de evaluaciones en cada clasificación por
+          dimensión.
         </p>
       </header>
 
-      <div className="flex flex-col gap-3 rounded-2xl border border-primary-100 bg-surface/70 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-        <p className="text-sm leading-relaxed text-muted">
-          El puntaje se muestra respecto al máximo posible en cada dimensión.
-        </p>
-        <Button href={`${API_BASE_URL}/api/evaluations/dashboard/report.xlsx`}>
-          Descargar reporte Excel
-        </Button>
-      </div>
-
-      <DashboardResults stats={stats} />
+      <DashboardResults dimensionOrder={dimensionOrder} stats={stats} />
 
       <div className="text-center">
         <Button color="default" size="xl" className="mt-4" href="/">

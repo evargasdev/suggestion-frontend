@@ -28,7 +28,7 @@ export default function Home() {
               size="sm"
               className="px-3.5 py-1 text-xs font-semibold uppercase tracking-widest rounded-full"
             >
-              Diagnóstico: Las mujeres en el trabajo turístico
+              Test: Las mujeres en el trabajo turístico
             </Badge>
           </div>
 
@@ -40,7 +40,7 @@ export default function Home() {
           {/* Presentación y Explicación del Test */}
           <div className="mx-auto mt-2 max-w-2xl space-y-3 text-muted">
             <p className="text-base leading-relaxed sm:text-lg">
-              Instrumento de diagnóstico anónimo diseñado para evaluar las
+              Test anónimo diseñado para evaluar las
               condiciones laborales de las mujeres en el sector turístico a
               través de <strong>cinco dimensiones clave</strong>:
             </p>

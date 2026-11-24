@@ -9,10 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "echarts": "^6.1.0",
     "flowbite-react": "^0.12.17",
     "next": "16.4.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-echarts-library": "^1.4.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",
