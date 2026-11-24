@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Las mujeres en el trabajo turístico — frontend
 
-## Getting Started
+Aplicación web para responder una encuesta anónima sobre las condiciones
+laborales de las mujeres en el sector turístico y consultar resultados por
+dimensión. Este frontend está construido con Next.js App Router, React,
+TypeScript, Tailwind CSS, Flowbite React y ECharts.
 
-First, run the development server:
+## Requisitos
+
+- Node.js 20.9 o posterior.
+- pnpm.
+- La [API](../suggestion-backend/README.md) disponible y configurada con una
+  base de datos PostgreSQL.
+
+## Configuración
+
+Desde este directorio, instala las dependencias:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Configura la URL base de la API en `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```dotenv
+NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+La URL debe apuntar al host y puerto donde esté expuesta la API; el prefijo
+`/api` se agrega en las solicitudes. Si no se define esta variable, la
+aplicación usa `http://localhost:4000`.
 
-## Learn More
+Para desarrollo local, inicia primero la API siguiendo las instrucciones de su
+[README](../suggestion-backend/README.md). La API requiere una conexión
+PostgreSQL y debe tener aplicado el esquema y los datos de catálogo necesarios
+para la encuesta.
 
-To learn more about Next.js, take a look at the following resources:
+## Comandos
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Iniciar el servidor de desarrollo:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev
+```
 
-## Deploy on Vercel
+Abrir [http://localhost:3000](http://localhost:3000).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Comprobar el código con ESLint:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm lint
+```
+
+Generar la aplicación de producción:
+
+```bash
+pnpm build
+```
+
+Ejecutar la compilación de producción:
+
+```bash
+pnpm start
+```
+
+## Páginas principales
+
+| Ruta | Descripción |
+| --- | --- |
+| `/` | Presentación del proyecto y acceso a la encuesta. |
+| `/test` | Captura de datos demográficos y respuestas por dimensión; envía la evaluación a la API. |
+| `/results?id=<id>` | Resultados individuales de una evaluación, usando el identificador recibido al enviarla. También acepta `evaluationId` como parámetro. |
+| `/dashboard` | Resultados públicos agregados en gráficas de pastel por dimensión. |
+
+El dashboard solicita los conteos de clasificación a
+`GET /api/evaluations/dashboard/classifications`, muestra las dimensiones en el
+orden de la encuesta y conserva el umbral mínimo de privacidad gestionado por
+la API.
+
+## Estructura del código
+
+- `src/app/`: páginas y rutas de Next.js.
+- `src/components/`: secciones reutilizables del formulario y elementos
+  institucionales.
+- `src/hooks/`: carga de la encuesta y envío de evaluaciones.
+- `src/lib/api/`: cliente y tipos de la API.
+- `src/lib/helpers/`: utilidades de presentación, datos de selectores e
+  infografías.
+- `public/`: recursos estáticos, como imágenes e infografías.
