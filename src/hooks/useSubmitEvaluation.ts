@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import {
   submitEvaluation,
@@ -14,12 +14,18 @@ interface SubmitEvaluationState {
 }
 
 export function useSubmitEvaluation(): SubmitEvaluationState {
+  const submissionInProgress = useRef(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (
     submission: EvaluationSubmissionInput,
   ): Promise<string | null> => {
+    if (submissionInProgress.current) {
+      return null;
+    }
+
+    submissionInProgress.current = true;
     setIsSubmitting(true);
     setError(null);
 
@@ -34,6 +40,7 @@ export function useSubmitEvaluation(): SubmitEvaluationState {
       );
       return null;
     } finally {
+      submissionInProgress.current = false;
       setIsSubmitting(false);
     }
   };

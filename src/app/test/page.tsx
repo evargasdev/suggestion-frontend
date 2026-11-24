@@ -226,6 +226,11 @@ export default function TestPage() {
     });
 
     if (evaluationId) {
+      setAnswers({});
+      setDemographics(initialDemographics);
+      setCurrentDimensionIndex(-1);
+      setInvalidQuestionId(null);
+      setInvalidDemographicsField(null);
       router.push(`/results?id=${encodeURIComponent(evaluationId)}`);
     }
   };
