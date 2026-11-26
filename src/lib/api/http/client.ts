@@ -13,7 +13,7 @@ import type {
 } from "@/lib/api/http/types";
 import { ApiErrorBody } from "@/types/api/errors";
 
-const DEFAULT_TIMEOUT_MS = 10_000;
+const DEFAULT_TIMEOUT_MS = 60_000;
 const BAD_GATEWAY_STATUS = 502;
 
 function joinUrl(baseUrl: string, path: string): string {

@@ -11,7 +11,7 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "Mujeres y Turismo // Test Laboral",
   description:
-    "Test anónimo para evaluar las condiciones laborales de las mujeres en el trabajo turístico de Playa del Carmen. Proyecto de investigación UQROO.",
+    "Test anónimo para evaluar las condiciones laborales de las mujeres en el trabajo turístico de Playa del Carmen. Observatorio de Estudios de Género.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

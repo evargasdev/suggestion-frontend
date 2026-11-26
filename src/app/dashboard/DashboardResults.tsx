@@ -8,15 +8,15 @@ import type { DashboardClassificationStat } from "@/lib/api/evaluations";
 const classifications = [
   {
     label: "Condiciones laborales desfavorables",
-    color: "#ef4444",
+    color: "#cab2ff",
   },
   {
     label: "Condiciones laborales parcialmente favorables",
-    color: "#f59e0b",
+    color: "#7232df",
   },
   {
     label: "Condiciones laborales favorables",
-    color: "#10b981",
+    color: "#411b7d",
   },
 ] as const;
 

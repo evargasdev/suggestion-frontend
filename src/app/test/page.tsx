@@ -79,6 +79,7 @@ export default function TestPage() {
       <div className="flex min-h-screen items-center justify-center px-4">
         <div className="w-full max-w-md rounded-3xl border border-border bg-surface/80 p-8 text-center shadow-card backdrop-blur-md">
           <p className="font-medium text-primary-900">Cargando encuesta...</p>
+          <p className="font-medium text-xs text-primary-900/50">Puede tardar hasta 60 segundos</p>
         </div>
       </div>
     );

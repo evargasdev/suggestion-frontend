@@ -214,8 +214,7 @@ export function DemographicsSection({
 
         <fieldset>
           <legend className="text-sm font-medium text-secondary-800">
-            ¿Te identificas con alguno de estos grupos? Puedes elegir más de
-            uno.
+            ¿Te identificas con alguno de estos grupos? (Puedes seleccionar más de una opción)
           </legend>
           <div className="mt-2 space-y-2">
             {vulnerableGroupOptions.map((group) => (
@@ -327,6 +326,9 @@ export function DemographicsSection({
 
           {demographics.hasCareResponsibilities && (
             <div className="mt-3 space-y-2">
+              <legend className="text-sm font-medium text-secondary-800">
+            (Puedes seleccionar más de una opción)
+          </legend>
               {careResponsibilityOptions.map((detail) => (
                 <label
                   key={detail}

@@ -40,9 +40,10 @@ export default function Home() {
           {/* Presentación y Explicación del Test */}
           <div className="mx-auto mt-2 max-w-2xl space-y-3 text-muted">
             <p className="text-base leading-relaxed sm:text-lg">
-              Test anónimo diseñado para evaluar las
-              condiciones laborales de las mujeres en el sector turístico a
-              través de <strong>cinco dimensiones clave</strong>:
+              ¿Eres mujer y trabajas en alguna actividad turística? ¿Quieres
+              conocer tu situación laboral? Contesta el test y evalúa las
+              condiciones de tu empleo actual en relación a
+              <strong> cinco aspectos:</strong>
             </p>
 
             {/* Píldoras de las 5 dimensiones */}
@@ -62,8 +63,10 @@ export default function Home() {
                 </span>
               ))}
             </div>
+            
 
             <p className="text-center text-sm leading-relaxed text-muted">
+              Esperamos que los resultados y las recomendaciones te sean útiles. 
               Tus respuestas son estrictamente confidenciales y se analizan de
               forma estadística agregada. Al finalizar, obtendrás el diagnóstico
               por dimensión junto con{" "}
@@ -117,7 +120,7 @@ export default function Home() {
 
               <ProjectCreditsModal
                 className="font-medium text-muted underline decoration-border-2 underline-offset-4 transition-colors hover:text-primary-800"
-                label="Equipo de investigación y desarrollo"
+                label="Equipo del Observatorio de Estudios de Género"
               />
             </div>
           </div>

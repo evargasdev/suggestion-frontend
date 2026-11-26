@@ -15,7 +15,7 @@ export default function InstitutionalFooter() {
               Universidad Autónoma del Estado de Quintana Roo
             </p>
             <p className="text-muted-2">
-              Observatorio de Género
+              Observatorio de Estudios de Género
             </p>
           </div>
         </div>
