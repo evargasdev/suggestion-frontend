@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import ResultsTabs, { type DimensionResult } from "./ResultsTabs";
 import { ApiError, INVALID_RESPONSE_MESSAGE } from "@/lib/api/http/errors";
 import { request } from "@/lib/api/http/client";
+import { getApiBaseUrl } from "@/lib/api/config";
 import InstitutionalFooter from "@/components/InstitutionalFooter";
 import { getInfographicUrl } from "@/lib/helpers/infographics";
 
@@ -75,10 +76,7 @@ async function ResultsContent({
 
   try {
     const { data } = await request<EvaluationResultsResponse>({
-      baseUrl:
-        process.env.API_BASE_URL ??
-        process.env.NEXT_PUBLIC_API_BASE_URL ??
-        "http://localhost:4000",
+      baseUrl: getApiBaseUrl(),
       path: `/api/evaluations/${encodeURIComponent(evaluationId)}/results`,
     });
 

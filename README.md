@@ -23,12 +23,14 @@ pnpm install
 Configura la URL base de la API en `.env.local`:
 
 ```dotenv
-NEXT_PUBLIC_API_BASE_URL=http://localhost:4000
+API_BASE_URL=http://localhost:4000
 ```
 
 La URL debe apuntar al host y puerto donde esté expuesta la API; el prefijo
-`/api` se agrega en las solicitudes. Si no se define esta variable, la
-aplicación usa `http://localhost:4000`.
+`/api` se agrega en las solicitudes. La encuesta y el envío de evaluaciones se
+conectan a la API mediante rutas del servidor, por lo que `API_BASE_URL` no se
+expone al navegador. Si no se define esta variable, la aplicación usa
+`http://localhost:4000`.
 
 Para desarrollo local, inicia primero la API siguiendo las instrucciones de su
 [README](../suggestion-backend/README.md). La API requiere una conexión

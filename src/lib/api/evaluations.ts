@@ -1,4 +1,5 @@
 import { request } from "@/lib/api/http/client";
+import { getApiRequestBaseUrl } from "@/lib/api/config";
 
 export interface SurveyAnswerOption {
   id: string;
@@ -70,14 +71,9 @@ export interface DashboardClassificationStat {
   evaluationCount: number;
 }
 
-export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL ??
-  process.env.API_BASE_URL ??
-  "http://localhost:4000"
-).replace(/\/+$/, "");
+const API_BASE_URL = getApiRequestBaseUrl();
 
 export async function getActiveSurvey(): Promise<SurveyResponse> {
-  console.log(API_BASE_URL)
   const { data } = await request<SurveyResponse>({
     baseUrl: API_BASE_URL,
     path: "/api/evaluations/survey",
